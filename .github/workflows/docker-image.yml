@@ -7,41 +7,42 @@ on:
     branches: [ "master" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Build services with Docker Compose
-      run: docker compose build
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Start application stack
-      run: docker compose up -d
+      - name: Build services with Docker Compose
+        run: docker compose build
 
-    - name: Wait for services to be ready
-      run: sleep 20
+      - name: Start application stack
+        run: docker compose up -d
 
-    - name: Verify running containers
-      run: docker compose ps
+      - name: Wait for services to be ready
+        run: sleep 20
 
-    - name: Smoke test backend
-      run: |
-          curl --retry 5 --retry-connrefused --retry-delay 5 --fail http://localhost:3001 || exit 1
-    - uses: mr-smithers-excellent/docker-build-push@v6
-    - name: Build & push Docker image
-      with:
+      - name: Verify running containers
+        run: docker compose ps
+
+      - name: Smoke test backend
+        run: |
+          curl --fail http://localhost:3001 || exit 1
+
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
           image: nguinfack/devops-app
           tags: v1, latest
-          registry: registry-url.io
-          dockerfile: Dockerfile.ci
+          registry: docker.io
+          dockerfile: ./backend/Dockerfile  # Ensure this points to your actual Dockerfile path
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Shut down stack
-      if: always()
-      run: docker compose down
+      - name: Shut down stack
+        if: always()
+        run: docker compose down
