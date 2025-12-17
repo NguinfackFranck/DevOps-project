@@ -2,6 +2,7 @@ services:
   frontend:
     depends_on:
       - backend
+    image: nguinfack/devops-app:backend
     build: ./frontend
     ports:
       - 3000:3000
@@ -9,6 +10,7 @@ services:
   backend:
     depends_on:
       - db
+    image: nguinfack/devops-app:backend
     build: ./backend
     ports:
       - 3001:3001
