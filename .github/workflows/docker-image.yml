@@ -27,14 +27,8 @@ jobs:
         run: |
           docker compose build
           docker compose up -d
-      - name: Tag and Push to Specific Repo
-        # This tags your images to match your Docker Hub URL
-        run: |
-          docker tag cloud-programming-frontend:latest nguinfack/devops-app:frontend
-          docker tag cloud-programming-backend:latest nguinfack/devops-app:backend
-          docker push nguinfack/devops-app:frontend
-          docker push nguinfack/devops-app:backend
-
+      - name: Push to Docker Hub
+        run: docker compose push
       - name: Shut down stack
         if: always()
         run: docker compose down
