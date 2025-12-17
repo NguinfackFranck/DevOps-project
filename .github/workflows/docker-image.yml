@@ -21,13 +21,13 @@ jobs:
       run: docker-compose build
 
     - name: Start application stack
-      run: docker-compose up -d
+      run: docker compose up -d
 
     - name: Wait for services to be ready
       run: sleep 20
 
     - name: Verify running containers
-      run: docker-compose ps
+      run: docker compose ps
 
     - name: Smoke test backend
       run: |
@@ -35,4 +35,4 @@ jobs:
 
     - name: Shut down stack
       if: always()
-      run: docker-compose down
+      run: docker compose down
