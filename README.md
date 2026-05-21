@@ -2,10 +2,10 @@ A complete CI/CD pipeline for a web application using GitHub Actions, Docker, Te
 
 🎯 Project Overview
 This case study implements DevOps best practices to solve real-world software delivery problems:
-ProblemSolutionManual builds & deploymentsAutomated GitHub Actions pipeline"Works on my machine"Docker containerisationConfiguration drift across environmentsTerraform Infrastructure as CodeInconsistent deploymentsRolling updates via AWS ECS FargateLate bug discoveryAutomated unit, integration & E2E tests
+Problem Solution Manual builds & deployments Automated GitHub Actions pipeline"Works on my machine"Docker containerisation Configuration drift across environments Terraform Infrastructure as Code Inconsistent deployments Rolling updates via AWS ECS FargateLate bug discovery Automated unit, integration & E2E tests
 
 🔧 Tech Stack
-ToolPurposeGit / GitHubVersion control + distributed branchingGitHub ActionsCI/CD automation engine (.github/workflows/ci-cd.yml)DockerContainerise frontend, backend, and servicesDocker HubVersioned image registryTerraformInfrastructure as Code (AWS provisioning)AWS ECS FargateServerless container deploymentAWS ALBLoad balancing + health checksAWS CloudWatchLogging and monitoringJest / JUnitAutomated testing
+ToolPurposeGit / GitHubVersion control + distributed branchingGitHub ActionsCI/CD automation engine (.github/workflows/ci-cd.yml)DockerContainerise frontend, backend, and services Docker Hub Versioned image registry Terraform Infrastructure as Code (AWS provisioning)AWS ECS Fargate Serverless container deployment AWS ALBLoad balancing + health checks AWS CloudWatch Logging and monitoringJest / JUnit Automated testing
 
 🚀 Pipeline Architecture
 Developer pushes code
@@ -60,8 +60,14 @@ terraform/
 ├── cloudwatch.tf       # Monitoring and alarms
 └── variables.tf
 
-🧪 Testing Strategy
-LayerToolWhenUnit TestsJUnit / JestEvery commitIntegration TestsCustom test suiteEvery commitEnd-to-End TestsE2E frameworkAfter staging deployHealth ChecksAWS ALBAfter every deploy
+🧪 Testing Strategy		
+		
+Layer	           Tool	                 When
+Unit Tests	  JUnit / Jest	        Every commit
+Integration Tests  Custom test suite	Every commit
+End-to-End Tests   E2E framework	After staging deploy
+Health Checks	   AWS ALB	        After every deploy
+
 
 ✅ Results & Benefits
 
